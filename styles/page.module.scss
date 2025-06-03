@@ -1,0 +1,200 @@
+.homePage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, var(--background) 0%, var(--secondary-color) 100%);
+}
+
+.header {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  gap: 60px;
+}
+
+.welcome {
+  text-align: center;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.logoIcon {
+  width: 64px;
+  height: 64px;
+  color: var(--primary-color);
+  filter: drop-shadow(0 4px 8px rgba(139, 69, 19, 0.2));
+}
+
+.logoText {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 4px;
+  text-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
+  margin: 0;
+}
+
+.welcomeText {
+  font-size: 24px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin: 0;
+}
+
+.orderTypeSection {
+  width: 100%;
+  max-width: 600px;
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+}
+
+.orderTypes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.orderTypeBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--card-background);
+  border: 3px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  gap: 16px;
+  min-height: 200px;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  &.dineIn:hover {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--card-background) 0%, var(--secondary-color) 100%);
+
+    .orderTypeIcon {
+      color: var(--primary-color);
+      transform: scale(1.1);
+    }
+  }
+
+  &.takeout:hover {
+    border-color: var(--accent-color);
+    background: linear-gradient(135deg, var(--card-background) 0%, #FFF8F0 100%);
+
+    .orderTypeIcon {
+      color: var(--accent-color);
+      transform: scale(1.1);
+    }
+  }
+}
+
+.orderTypeIcon {
+  width: 48px;
+  height: 48px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.orderTypeText {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .logoIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logoText {
+    font-size: 36px;
+    letter-spacing: 2px;
+  }
+
+  .welcomeText {
+    font-size: 18px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+
+  .orderTypes {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .orderTypeBtn {
+    padding: 30px 20px;
+    min-height: 160px;
+  }
+
+  .orderTypeIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .orderTypeText {
+    font-size: 18px;
+  }
+}
