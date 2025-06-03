@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name_ko   String
+  name_en   String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  menus Menu[]
+
+  @@map("categories")
+}
+
+model Menu {
+  id             Int      @id @default(autoincrement())
+  name_ko        String
+  name_en        String
+  description_ko String?  @db.Text
+  description_en String?  @db.Text
+  price          Int
+  image          String?
+  isActive       Boolean  @default(true)
+  order          Int      @default(0)
+  categoryId     Int
+  options        Json? // 옵션 정보 (사이즈, 온도 등)
+  allergens      String? // 알레르기 정보
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  category   Category    @relation(fields: [categoryId], references: [id])
+  orderItems OrderItem[]
+
+  @@map("menus")
+}
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  orderNumber String   @unique
+  orderType   String // "dine_in" or "takeout"
+  totalPrice  Int
+  status      String   @default("pending") // pending, completed, cancelled
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id       Int   @id @default(autoincrement())
+  orderId  Int
+  menuId   Int
+  quantity Int
+  price    Int
+  options  Json? // 선택된 옵션들
+
+  order Order @relation(fields: [orderId], references: [id])
+  menu  Menu  @relation(fields: [menuId], references: [id])
+
+  @@map("order_items")
+}
