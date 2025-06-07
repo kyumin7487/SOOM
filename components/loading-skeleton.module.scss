@@ -1,0 +1,73 @@
+@use '../styles/mixins' as *;
+
+.container {
+  @include container;
+  padding-top: map-get($spacing, 5);
+  padding-bottom: map-get($spacing, 5);
+}
+
+.categories {
+  @include flex-center;
+  gap: map-get($spacing, 3);
+  margin-bottom: map-get($spacing, 8);
+}
+
+.categorySkeleton {
+  width: 100px;
+  height: 44px;
+  border-radius: 25px;
+  @include loading-skeleton;
+}
+
+.menuGrid {
+  @include grid(auto-fill, 280px, map-get($spacing, 6));
+}
+
+.menuSkeleton {
+  @include card-base;
+  overflow: hidden;
+}
+
+.imageSkeleton {
+  width: 100%;
+  height: 200px;
+  @include loading-skeleton;
+}
+
+.contentSkeleton {
+  padding: map-get($spacing, 5);
+  @include flex-column;
+  gap: map-get($spacing, 3);
+}
+
+.titleSkeleton {
+  width: 70%;
+  height: 20px;
+  border-radius: 4px;
+  @include loading-skeleton;
+}
+
+.descriptionSkeleton {
+  width: 100%;
+  height: 16px;
+  border-radius: 4px;
+  @include loading-skeleton;
+}
+
+.priceSkeleton {
+  width: 50%;
+  height: 18px;
+  border-radius: 4px;
+  @include loading-skeleton;
+}
+
+@include respond-below(md) {
+  .container {
+    padding-top: map-get($spacing, 4);
+    padding-bottom: map-get($spacing, 4);
+  }
+
+  .menuGrid {
+    @include grid(auto-fill, 250px, map-get($spacing, 4));
+  }
+}

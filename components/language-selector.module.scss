@@ -1,12 +1,10 @@
+@use '../styles/mixins' as *;
+
 .languageSelector {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--card-background);
-  padding: 8px 12px;
-  border-radius: var(--border-radius-small);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border-color);
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  @include card-base;
+  padding: map-get($spacing, 2) map-get($spacing, 3);
 }
 
 .icon {
@@ -16,15 +14,13 @@
 }
 
 .langBtn {
-  padding: 6px 12px;
+  padding: map-get($spacing, 1) map-get($spacing, 3);
   border: none;
   background: transparent;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  @include text(sm, medium, var(--text-secondary));
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: map-get($transitions, fast);
 
   &:hover {
     background: var(--secondary-color);
