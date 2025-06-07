@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Coffee, Package } from "lucide-react"
 import LanguageSelector from "@/components/language-selector"
 import { t } from "@/lib/translations"
-import styles from "@/styles/page.module.scss"
+import styles from "@/app/page.module.scss"
 
 export default function HomePage() {
   const { state, dispatch } = useCart()
