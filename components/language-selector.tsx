@@ -2,7 +2,7 @@
 
 import { useCart } from "@/contexts/cart-context"
 import { Globe } from "lucide-react"
-import styles from "@/styles/language-selector.module.scss"
+import styles from "./language-selector.module.scss"
 
 export default function LanguageSelector() {
     const { state, dispatch } = useCart()

@@ -1,0 +1,84 @@
+@use '../styles/mixins' as *;
+
+.header {
+  background: var(--card-background);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(139, 69, 19, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: map-get($z-index, sticky);
+}
+
+.container {
+  @include container;
+  @include flex-between;
+  padding-top: map-get($spacing, 4);
+  padding-bottom: map-get($spacing, 4);
+}
+
+.left {
+  @include flex-center;
+  gap: map-get($spacing, 4);
+}
+
+.backBtn {
+  @include button-icon;
+  background: var(--secondary-color);
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--primary-light);
+    transform: scale(1.05);
+  }
+}
+
+.title {
+  @include heading(2xl, semibold);
+}
+
+.right {
+  @include flex-center;
+  gap: map-get($spacing, 4);
+}
+
+.cartBtn {
+  @include button-icon(48px);
+  background: var(--primary-color);
+  color: white;
+  box-shadow: var(--shadow);
+  position: relative;
+
+  &:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--error-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  @include flex-center;
+  @include text(xs, semibold);
+  border: 2px solid white;
+}
+
+@include respond-below(md) {
+  .container {
+    padding-top: map-get($spacing, 3);
+    padding-bottom: map-get($spacing, 3);
+  }
+
+  .title {
+    @include heading(xl, semibold);
+  }
+
+  .cartBtn {
+    @include button-icon(44px);
+  }
+}
