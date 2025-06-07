@@ -1,0 +1,90 @@
+// Colors
+:root {
+  --primary-color: #8B4513;
+  --primary-light: #D2B48C;
+  --primary-dark: #654321;
+  --secondary-color: #F5E6D3;
+  --accent-color: #E6B17A;
+  --text-primary: #2C1810;
+  --text-secondary: #6B4E3D;
+  --background: #FEFCF8;
+  --card-background: #FFFFFF;
+  --border-color: #E8DDD4;
+  --shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
+  --shadow-hover: 0 8px 30px rgba(139, 69, 19, 0.15);
+  --border-radius: 16px;
+  --border-radius-small: 8px;
+  --error-color: #FF6B6B;
+  --success-color: #4CAF50;
+  --warning-color: #FFA726;
+}
+
+// Typography
+$font-family-primary: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-mono: 'Courier New', monospace;
+
+$font-sizes: (
+        xs: 12px,
+        sm: 14px,
+        base: 16px,
+        lg: 18px,
+        xl: 20px,
+        2xl: 24px,
+        3xl: 28px,
+        4xl: 36px,
+        5xl: 48px
+);
+
+$font-weights: (
+        light: 300,
+        normal: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700
+);
+
+// Spacing
+$spacing: (
+        0: 0,
+        1: 4px,
+        2: 8px,
+        3: 12px,
+        4: 16px,
+        5: 20px,
+        6: 24px,
+        8: 32px,
+        10: 40px,
+        12: 48px,
+        16: 64px,
+        20: 80px
+);
+
+// Breakpoints
+$breakpoints: (
+        xs: 480px,
+        sm: 640px,
+        md: 768px,
+        lg: 1024px,
+        xl: 1280px,
+        2xl: 1536px
+);
+
+// Z-index
+$z-index: (
+        dropdown: 100,
+        sticky: 200,
+        fixed: 300,
+        modal-backdrop: 400,
+        modal: 500,
+        popover: 600,
+        tooltip: 700,
+        toast: 800
+);
+
+// Transitions
+$transitions: (
+        fast: 0.15s ease-out,
+        normal: 0.2s ease-out,
+        slow: 0.3s ease-out,
+        bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+);

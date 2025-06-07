@@ -1,0 +1,140 @@
+@use 'mixins' as *;
+
+// Button utilities
+.btn {
+  @include button-base;
+
+  &.btn-primary {
+    @include button-primary;
+  }
+
+  &.btn-secondary {
+    @include button-secondary;
+  }
+
+  &.btn-large {
+    @include button-large;
+  }
+
+  &.btn-icon {
+    @include button-icon;
+  }
+}
+
+// Card utilities
+.card {
+  @include card-base;
+
+  &.card-hover {
+    @include card-hover;
+  }
+
+  &.card-interactive {
+    @include card-interactive;
+  }
+}
+
+// Grid utilities
+.grid {
+  @include grid;
+
+  &.grid-2 {
+    @include grid(auto-fit, 300px);
+  }
+
+  &.grid-3 {
+    @include grid(auto-fit, 250px);
+  }
+
+  &.grid-4 {
+    @include grid(auto-fit, 200px);
+  }
+}
+
+// Flex utilities
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+.flex-column {
+  @include flex-column;
+}
+
+.flex-column-center {
+  @include flex-column-center;
+}
+
+// Text utilities
+.text-xs { @include text(xs); }
+.text-sm { @include text(sm); }
+.text-base { @include text(base); }
+.text-lg { @include text(lg); }
+.text-xl { @include text(xl); }
+.text-2xl { @include text(2xl); }
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--primary-color); }
+.text-error { color: var(--error-color); }
+.text-success { color: var(--success-color); }
+
+.font-light { font-weight: map-get($font-weights, light); }
+.font-normal { font-weight: map-get($font-weights, normal); }
+.font-medium { font-weight: map-get($font-weights, medium); }
+.font-semibold { font-weight: map-get($font-weights, semibold); }
+.font-bold { font-weight: map-get($font-weights, bold); }
+
+.truncate { @include truncate; }
+.truncate-2 { @include truncate(2); }
+.truncate-3 { @include truncate(3); }
+
+// Spacing utilities
+@each $name, $value in $spacing {
+  .p-#{$name} { padding: $value; }
+  .pt-#{$name} { padding-top: $value; }
+  .pr-#{$name} { padding-right: $value; }
+  .pb-#{$name} { padding-bottom: $value; }
+  .pl-#{$name} { padding-left: $value; }
+  .px-#{$name} { padding-left: $value; padding-right: $value; }
+  .py-#{$name} { padding-top: $value; padding-bottom: $value; }
+
+  .m-#{$name} { margin: $value; }
+  .mt-#{$name} { margin-top: $value; }
+  .mr-#{$name} { margin-right: $value; }
+  .mb-#{$name} { margin-bottom: $value; }
+  .ml-#{$name} { margin-left: $value; }
+  .mx-#{$name} { margin-left: $value; margin-right: $value; }
+  .my-#{$name} { margin-top: $value; margin-bottom: $value; }
+}
+
+// Accessibility
+.sr-only {
+  @include sr-only;
+}
+
+.large-text {
+  font-size: 1.2em;
+
+  .btn {
+    padding: map-get($spacing, 4) map-get($spacing, 7);
+    font-size: map-get($font-sizes, lg);
+
+    &.btn-large {
+      padding: map-get($spacing, 5) map-get($spacing, 9);
+      font-size: map-get($font-sizes, xl);
+    }
+  }
+}
+
+// Loading states
+.loading {
+  @include loading-skeleton;
+}
+
+.spinner {
+  @include spinner;
+}
