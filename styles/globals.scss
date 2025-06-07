@@ -1,3 +1,8 @@
+@use 'variables';
+@use 'mixins';
+@use 'animations';
+@use 'utilities';
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -24,17 +29,17 @@
 }
 
 body {
-  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: $font-family-primary;
   background: linear-gradient(135deg, var(--background) 0%, var(--secondary-color) 100%);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  @include container;
 }
 
 .btn {
@@ -158,30 +163,29 @@ body {
   border: 0;
 }
 
-// 반응형
-@media (max-width: 768px) {
-  .container {
-    padding: 0 16px;
-  }
+// Focus styles
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
 
-  .grid {
-    gap: 16px;
+// Selection styles
+::selection {
+  background: var(--primary-light);
+  color: var(--text-primary);
+}
 
-    &.grid-2,
-    &.grid-3,
-    &.grid-4 {
-      grid-template-columns: 1fr;
-    }
-  }
+// Scrollbar
+html {
+  @include scrollbar-custom;
+}
 
-  .btn {
-    padding: 14px 20px;
-    font-size: 16px;
-
-    &.btn-large {
-      padding: 18px 24px;
-      font-size: 18px;
-    }
+// Print styles
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
   }
 }
 
