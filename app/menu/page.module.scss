@@ -1,47 +1,34 @@
+@use '../styles/mixins' as *;
+
 .menuPage {
   min-height: 100vh;
   background: var(--background);
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  @include container;
+  padding-top: map-get($spacing, 5);
+  padding-bottom: map-get($spacing, 5);
 }
 
 .categories {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 30px;
+  @include flex-center;
+  gap: map-get($spacing, 3);
+  margin-bottom: map-get($spacing, 8);
   overflow-x: auto;
-  padding-bottom: 8px;
-
-  &::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--border-color);
-    border-radius: 2px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 2px;
-  }
+  padding-bottom: map-get($spacing, 2);
+  @include scrollbar-custom;
 }
 
 .categoryBtn {
   flex-shrink: 0;
-  padding: 12px 24px;
+  padding: map-get($spacing, 3) map-get($spacing, 6);
   border: 2px solid var(--border-color);
   background: var(--card-background);
   border-radius: 25px;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  @include text(base, medium, var(--text-secondary));
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: map-get($transitions, normal);
   white-space: nowrap;
 
   &:hover {
@@ -58,40 +45,27 @@
 }
 
 .menuGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  animation: fadeIn 0.5s ease-out;
+  @include grid(auto-fill, 280px, map-get($spacing, 6));
+  @include fade-in;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
+@include respond-below(md) {
   .container {
-    padding: 16px;
+    padding-top: map-get($spacing, 4);
+    padding-bottom: map-get($spacing, 4);
   }
 
   .categories {
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: map-get($spacing, 2);
+    margin-bottom: map-get($spacing, 5);
   }
 
   .categoryBtn {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: map-get($spacing, 2) map-get($spacing, 5);
+    @include text(sm, medium);
   }
 
   .menuGrid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
+    @include grid(auto-fill, 250px, map-get($spacing, 4));
   }
 }
