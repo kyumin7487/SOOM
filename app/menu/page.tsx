@@ -4,33 +4,16 @@ import { useState, useEffect } from "react"
 import { useCart } from "@/contexts/cart-context"
 import Header from "@/components/header"
 import MenuCard from "@/components/menu-card"
+import LoadingSkeleton from "@/components/loading-skeleton"
 import type { Category, Menu } from "@/lib/types"
 import { t } from "@/lib/translations"
 import styles from "./page.module.scss"
 
-// 임시 데이터
+// 임시 데이터 (실제로는 API에서 가져옴)
 const mockCategories: Category[] = [
-    {
-        id: 1,
-        name_ko: "커피",
-        name_en: "Coffee",
-        order: 1,
-        isActive: true,
-    },
-    {
-        id: 2,
-        name_ko: "음료",
-        name_en: "Beverage",
-        order: 2,
-        isActive: true,
-    },
-    {
-        id: 3,
-        name_ko: "디저트",
-        name_en: "Dessert",
-        order: 3,
-        isActive: true,
-    },
+    { id: 1, name_ko: "커피", name_en: "Coffee", order: 1, isActive: true },
+    { id: 2, name_ko: "음료", name_en: "Beverage", order: 2, isActive: true },
+    { id: 3, name_ko: "디저트", name_en: "Dessert", order: 3, isActive: true },
 ]
 
 const mockMenus: Menu[] = [
@@ -133,13 +116,35 @@ export default function MenuPage() {
     const [selectedCategory, setSelectedCategory] = useState<number>(1)
     const [categories, setCategories] = useState<Category[]>([])
     const [menus, setMenus] = useState<Menu[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setCategories(mockCategories)
-        setMenus(mockMenus)
+        // 실제로는 API 호출
+        const loadData = async () => {
+            setLoading(true)
+            // 로딩 시뮬레이션
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+            setCategories(mockCategories)
+            setMenus(mockMenus)
+            setLoading(false)
+        }
+
+        loadData()
     }, [])
 
     const filteredMenus = menus.filter((menu) => menu.categoryId === selectedCategory && menu.isActive)
+
+    if (loading) {
+        return (
+            <div className={styles.menuPage}>
+                <Header
+                    title={state.orderType === "dine_in" ? t("dineIn", state.language) : t("takeout", state.language)}
+                    showBack={true}
+                />
+                <LoadingSkeleton />
+            </div>
+        )
+    }
 
     return (
         <div className={styles.menuPage}>
