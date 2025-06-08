@@ -1,0 +1,91 @@
+@use '../styles/mixins' as *;
+
+.overlay {
+  @include overlay(map-get($z-index, modal));
+  @include fade-in(0.2s);
+}
+
+.dialog {
+  @include card-base;
+  max-width: 400px;
+  width: 90%;
+  padding: map-get($spacing, 6);
+  position: relative;
+  text-align: center;
+  @include slide-up(0.3s);
+}
+
+.closeBtn {
+  position: absolute;
+  top: map-get($spacing, 4);
+  right: map-get($spacing, 4);
+  @include button-icon(32px);
+  background: transparent;
+  color: var(--text-secondary);
+
+  &:hover {
+    background: var(--border-color);
+  }
+}
+
+.icon {
+  @include flex-center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto map-get($spacing, 4);
+
+  &.info {
+    background: var(--primary-light);
+    color: var(--primary-color);
+  }
+
+  &.warning {
+    background: #FFF3CD;
+    color: var(--warning-color);
+  }
+
+  &.danger {
+    background: #F8D7DA;
+    color: var(--error-color);
+  }
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.title {
+  @include heading(xl, semibold);
+  margin-bottom: map-get($spacing, 3);
+}
+
+.message {
+  @include text(base, normal, var(--text-secondary));
+  line-height: 1.5;
+  margin-bottom: map-get($spacing, 6);
+}
+
+.actions {
+  @include flex-center;
+  gap: map-get($spacing, 3);
+}
+
+.dangerBtn {
+  background: linear-gradient(135deg, var(--error-color), #E53E3E) !important;
+}
+
+@include respond-below(md) {
+  .dialog {
+    padding: map-get($spacing, 5);
+  }
+
+  .actions {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
