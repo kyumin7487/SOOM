@@ -1,0 +1,83 @@
+@use '../styles/mixins' as *;
+
+.toast {
+  position: fixed;
+  top: map-get($spacing, 5);
+  right: map-get($spacing, 5);
+  @include flex-center;
+  gap: map-get($spacing, 3);
+  padding: map-get($spacing, 4) map-get($spacing, 5);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
+  z-index: map-get($z-index, toast);
+  min-width: 300px;
+  transition: all 0.3s ease;
+
+  &.visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &.hidden {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  &.success {
+    background: var(--success-color);
+    color: white;
+  }
+
+  &.error {
+    background: var(--error-color);
+    color: white;
+  }
+
+  &.warning {
+    background: var(--warning-color);
+    color: white;
+  }
+
+  &.info {
+    background: var(--primary-color);
+    color: white;
+  }
+}
+
+.icon {
+  @include flex-center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.message {
+  flex: 1;
+  @include text(base, medium);
+}
+
+.closeBtn {
+  @include button-icon(24px);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@include respond-below(md) {
+  .toast {
+    top: map-get($spacing, 3);
+    right: map-get($spacing, 3);
+    left: map-get($spacing, 3);
+    min-width: auto;
+  }
+}
