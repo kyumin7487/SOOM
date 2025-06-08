@@ -1,0 +1,40 @@
+@use '../styles/mixins' as *;
+
+.accessibilityToolbar {
+  position: fixed;
+  top: 50%;
+  right: map-get($spacing, 4);
+  transform: translateY(-50%);
+  @include flex-column;
+  gap: map-get($spacing, 2);
+  z-index: map-get($z-index, fixed);
+}
+
+.toolbarBtn {
+  @include button-icon(48px);
+  background: var(--card-background);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow);
+
+  &:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+  }
+
+  &.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+}
+
+@include respond-below(md) {
+  .accessibilityToolbar {
+    right: map-get($spacing, 2);
+  }
+
+  .toolbarBtn {
+    @include button-icon(40px);
+  }
+}
