@@ -1,0 +1,113 @@
+@use '../styles/mixins' as *;
+
+.quickOrder {
+  @include card-base;
+  padding: map-get($spacing, 5);
+  margin-bottom: map-get($spacing, 6);
+}
+
+.tabs {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  margin-bottom: map-get($spacing, 4);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  padding: map-get($spacing, 3) map-get($spacing, 4);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: map-get($transitions, normal);
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+  }
+}
+
+.tabIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.menuList {
+  @include flex-column;
+  gap: map-get($spacing, 3);
+  max-height: 300px;
+  overflow-y: auto;
+  @include scrollbar-custom;
+}
+
+.quickMenuItem {
+  @include flex-between;
+  padding: map-get($spacing, 3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  transition: map-get($transitions, normal);
+
+  &:hover {
+    border-color: var(--primary-light);
+    background: var(--secondary-color);
+  }
+}
+
+.menuImage {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius-small);
+  object-fit: cover;
+}
+
+.menuInfo {
+  flex: 1;
+  @include flex-column;
+  gap: map-get($spacing, 1);
+  margin-left: map-get($spacing, 3);
+}
+
+.menuName {
+  @include text(base, semibold);
+  margin: 0;
+}
+
+.menuPrice {
+  @include text(sm, medium, var(--primary-color));
+}
+
+.quickAddBtn {
+  @include button-icon(36px);
+  background: var(--primary-color);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+
+  &:hover {
+    background: var(--primary-dark);
+    transform: scale(1.1);
+  }
+}
+
+@include respond-below(md) {
+  .quickOrder {
+    padding: map-get($spacing, 4);
+  }
+
+  .menuImage {
+    width: 50px;
+    height: 50px;
+  }
+
+  .quickAddBtn {
+    @include button-icon(32px);
+    font-size: 18px;
+  }
+}
