@@ -1,0 +1,90 @@
+@use '../styles/mixins' as *;
+
+.progressIndicator {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  padding: map-get($spacing, 4) map-get($spacing, 5);
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: map-get($spacing, 6);
+}
+
+.stepContainer {
+  @include flex-column-center;
+  gap: map-get($spacing, 2);
+  position: relative;
+}
+
+.step {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--border-color);
+  color: var(--text-secondary);
+  font-weight: map-get($font-weights, semibold);
+  transition: map-get($transitions, normal);
+
+  &.active {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  &.completed {
+    background: var(--success-color);
+    color: white;
+  }
+}
+
+.checkIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.stepNumber {
+  @include text(sm, semibold);
+}
+
+.stepLabel {
+  @include text(xs, medium, var(--text-secondary));
+  text-align: center;
+  white-space: nowrap;
+}
+
+.connector {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  width: 40px;
+  height: 2px;
+  background: var(--border-color);
+  transition: map-get($transitions, normal);
+
+  &.completed {
+    background: var(--success-color);
+  }
+}
+
+@include respond-below(md) {
+  .progressIndicator {
+    padding: map-get($spacing, 3);
+    gap: map-get($spacing, 1);
+  }
+
+  .step {
+    width: 32px;
+    height: 32px;
+  }
+
+  .stepLabel {
+    @include text(xs, medium);
+  }
+
+  .connector {
+    width: 30px;
+    left: 40px;
+    top: 16px;
+  }
+}
