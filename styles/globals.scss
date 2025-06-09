@@ -203,3 +203,56 @@ html {
     }
   }
 }
+
+// 고대비 모드
+.high-contrast {
+  --primary-color: #000000;
+  --primary-light: #333333;
+  --primary-dark: #000000;
+  --secondary-color: #FFFFFF;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --background: #FFFFFF;
+  --card-background: #FFFFFF;
+  --border-color: #000000;
+
+  .btn-primary {
+    background: #000000 !important;
+    color: #FFFFFF !important;
+    border: 2px solid #000000 !important;
+  }
+
+  .btn-secondary {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+  }
+}
+
+// 터치 피드백
+@media (hover: none) and (pointer: coarse) {
+  .btn:active,
+  .card:active,
+  button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+}
+
+// 키보드 네비게이션 강화
+*:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// 애니메이션 감소 설정 존중
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
