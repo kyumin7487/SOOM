@@ -7,10 +7,15 @@ import CartItem from "@/components/cart-item"
 import { t } from "@/lib/translations"
 import { ShoppingBag } from "lucide-react"
 import styles from "./page.module.scss"
+import ProgressIndicator from "@/components/progress-indicator"
+import ConfirmationDialog from "@/components/confirmation-dialog"
+import AccessibilityToolbar from "@/components/accessibility-toolbar"
+import { useState } from "react"
 
 export default function CartPage() {
-    const { state, totalPrice } = useCart()
+    const { state, totalPrice, dispatch } = useCart()
     const router = useRouter()
+    const [showClearDialog, setShowClearDialog] = useState(false)
 
     const formatPrice = (price: number) => {
         return `${price.toLocaleString()}${t("won", state.language)}`
@@ -22,9 +27,15 @@ export default function CartPage() {
         }
     }
 
+    const handleClearCart = () => {
+        dispatch({ type: "CLEAR_CART" })
+        setShowClearDialog(false)
+    }
+
     if (state.items.length === 0) {
         return (
             <div className={styles.cartPage}>
+                <AccessibilityToolbar />
                 <Header title={t("cart", state.language)} showBack={true} showCart={false} />
 
                 <div className={styles.emptyCart}>
@@ -40,9 +51,11 @@ export default function CartPage() {
 
     return (
         <div className={styles.cartPage}>
+            <AccessibilityToolbar />
             <Header title={t("cart", state.language)} showBack={true} showCart={false} />
 
             <div className={styles.container}>
+                <ProgressIndicator currentStep={3} />
                 <div className={styles.orderType}>
           <span className={styles.orderTypeLabel}>
             {state.orderType === "dine_in" ? t("dineIn", state.language) : t("takeout", state.language)}
@@ -65,6 +78,14 @@ export default function CartPage() {
                         {t("order", state.language)}
                     </button>
                 </div>
+                <ConfirmationDialog
+                    isOpen={showClearDialog}
+                    title="장바구니 비우기"
+                    message="장바구니의 모든 상품이 삭제됩니다. 계속하시겠습니까?"
+                    onConfirm={handleClearCart}
+                    onCancel={() => setShowClearDialog(false)}
+                    type="warning"
+                />
             </div>
         </div>
     )

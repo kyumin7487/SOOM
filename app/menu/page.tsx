@@ -8,8 +8,11 @@ import LoadingSkeleton from "@/components/loading-skeleton"
 import type { Category, Menu } from "@/lib/types"
 import { t } from "@/lib/translations"
 import styles from "./page.module.scss"
+import QuickOrder from "@/components/quick-order"
+import ProgressIndicator from "@/components/progress-indicator"
+import AccessibilityToolbar from "@/components/accessibility-toolbar"
 
-// 임시 데이터 (실제로는 API에서 가져옴)
+// 임시 데이터
 const mockCategories: Category[] = [
     { id: 1, name_ko: "커피", name_en: "Coffee", order: 1, isActive: true },
     { id: 2, name_ko: "음료", name_en: "Beverage", order: 2, isActive: true },
@@ -111,6 +114,10 @@ const mockMenus: Menu[] = [
     },
 ]
 
+// 임시 인기 메뉴 데이터 추가:
+const popularMenus = mockMenus.slice(0, 3)
+const recentOrders = mockMenus.slice(1, 3)
+
 export default function MenuPage() {
     const { state } = useCart()
     const [selectedCategory, setSelectedCategory] = useState<number>(1)
@@ -148,12 +155,15 @@ export default function MenuPage() {
 
     return (
         <div className={styles.menuPage}>
+            <AccessibilityToolbar />
             <Header
                 title={state.orderType === "dine_in" ? t("dineIn", state.language) : t("takeout", state.language)}
                 showBack={true}
             />
 
             <div className={styles.container}>
+                <ProgressIndicator currentStep={2} />
+                <QuickOrder popularMenus={popularMenus} recentOrders={recentOrders} />
                 <div className={styles.categories}>
                     {categories.map((category) => (
                         <button
