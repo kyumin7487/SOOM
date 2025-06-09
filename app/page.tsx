@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation"
 import { Coffee, Package } from "lucide-react"
 import LanguageSelector from "@/components/language-selector"
 import { t } from "@/lib/translations"
-import styles from "@/app/page.module.scss"
+import styles from "./page.module.scss"
+import AccessibilityToolbar from "@/components/accessibility-toolbar"
+import ProgressIndicator from "@/components/progress-indicator"
 
 export default function HomePage() {
   const { state, dispatch } = useCart()
@@ -18,6 +20,8 @@ export default function HomePage() {
 
   return (
       <div className={styles.homePage}>
+        <AccessibilityToolbar />
+        <ProgressIndicator currentStep={1} />
         <div className={styles.header}>
           <LanguageSelector />
         </div>

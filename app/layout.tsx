@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { CartProvider } from "@/contexts/cart-context"
 import "@/styles/globals.scss"
+import ToastContainer from "@/components/toast-container"
 
 export const metadata: Metadata = {
     title: "SOOM - 카페 키오스크",
@@ -32,7 +33,10 @@ export default function RootLayout({
             <meta name="theme-color" content="#8B4513" />
         </head>
         <body>
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+            {children}
+            <ToastContainer />
+        </CartProvider>
         </body>
         </html>
     )
