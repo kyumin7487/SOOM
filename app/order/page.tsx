@@ -7,6 +7,9 @@ import Header from "@/components/header"
 import { t } from "@/lib/translations"
 import { CreditCard, Check } from "lucide-react"
 import styles from "./page.module.scss"
+import ProgressIndicator from "@/components/progress-indicator"
+import AccessibilityToolbar from "@/components/accessibility-toolbar"
+import { useToast } from "@/hook/use-toast"
 
 export default function OrderPage() {
     const { state, totalPrice, dispatch } = useCart()
@@ -14,6 +17,7 @@ export default function OrderPage() {
     const [isProcessing, setIsProcessing] = useState(false)
     const [orderComplete, setOrderComplete] = useState(false)
     const [orderNumber, setOrderNumber] = useState("")
+    const { success, error } = useToast()
 
     const formatPrice = (price: number) => {
         return `${price.toLocaleString()}${t("won", state.language)}`
@@ -30,13 +34,17 @@ export default function OrderPage() {
     const handlePayment = async () => {
         setIsProcessing(true)
 
-        // 결제 처리 시뮬레이션
-        await new Promise((resolve) => setTimeout(resolve, 2000))
-
-        const newOrderNumber = generateOrderNumber()
-        setOrderNumber(newOrderNumber)
-        setOrderComplete(true)
-        setIsProcessing(false)
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+            const newOrderNumber = generateOrderNumber()
+            setOrderNumber(newOrderNumber)
+            setOrderComplete(true)
+            success("결제가 완료되었습니다!")
+        } catch (err) {
+            error("결제 중 오류가 발생했습니다.")
+        } finally {
+            setIsProcessing(false)
+        }
     }
 
     const handleBackToMain = () => {
@@ -47,6 +55,7 @@ export default function OrderPage() {
     if (orderComplete) {
         return (
             <div className={styles.orderPage}>
+                <AccessibilityToolbar />
                 <Header title={t("orderComplete", state.language)} showBack={false} showCart={false} />
 
                 <div className={styles.successContainer}>
@@ -77,9 +86,11 @@ export default function OrderPage() {
 
     return (
         <div className={styles.orderPage}>
+            <AccessibilityToolbar />
             <Header title={t("orderSummary", state.language)} showBack={true} showCart={false} />
 
             <div className={styles.container}>
+                <ProgressIndicator currentStep={4} />
                 <div className={styles.orderType}>
           <span className={styles.orderTypeLabel}>
             {state.orderType === "dine_in" ? t("dineIn", state.language) : t("takeout", state.language)}
