@@ -1,0 +1,221 @@
+@use '../../../styles/mixins' as *;
+
+.dashboard {
+  @include flex-column;
+  gap: map-get($spacing, 6);
+}
+
+.dashboardHeader {
+  @include flex-between;
+  margin-bottom: map-get($spacing, 4);
+}
+
+.pageTitle {
+  @include heading(2xl, semibold);
+  margin: 0;
+}
+
+.dateSelector {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  padding: map-get($spacing, 2) map-get($spacing, 4);
+  background: white;
+  border-radius: var(--border-radius-small);
+  border: 1px solid var(--border-color);
+  @include text(sm, medium);
+}
+
+.calendarIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--primary-color);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: map-get($spacing, 5);
+}
+
+.statCard {
+  @include card-base;
+  padding: map-get($spacing, 5);
+  display: flex;
+  align-items: center;
+  gap: map-get($spacing, 4);
+
+  &.blue .statIcon {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3B82F6;
+  }
+
+  &.green .statIcon {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+  }
+
+  &.orange .statIcon {
+    background: rgba(249, 115, 22, 0.1);
+    color: #F97316;
+  }
+
+  &.purple .statIcon {
+    background: rgba(168, 85, 247, 0.1);
+    color: #A855F7;
+  }
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  @include flex-center;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.statInfo {
+  @include flex-column;
+  gap: map-get($spacing, 1);
+}
+
+.statTitle {
+  @include text(sm, medium, var(--text-secondary));
+  margin: 0;
+}
+
+.statValue {
+  @include text(2xl, bold);
+  margin: 0;
+}
+
+.statChange {
+  @include flex-center;
+  gap: map-get($spacing, 1);
+  @include text(xs, medium);
+
+  &.positive {
+    color: #22C55E;
+  }
+
+  &.negative {
+    color: #EF4444;
+  }
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: map-get($spacing, 6);
+
+  @include respond-to(lg) {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.gridItem {
+  @include card-base;
+  padding: map-get($spacing, 5);
+}
+
+.cardHeader {
+  @include flex-between;
+  margin-bottom: map-get($spacing, 4);
+}
+
+.cardTitle {
+  @include heading(lg, semibold);
+  margin: 0;
+}
+
+.viewAll {
+  @include text(sm, medium, var(--primary-color));
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: map-get($spacing, 3);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th {
+    @include text(sm, semibold, var(--text-secondary));
+    background: #F9FAFB;
+  }
+
+  td {
+    @include text(sm, normal);
+  }
+
+  tbody tr:hover {
+    background: #F9FAFB;
+  }
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  @include text(xs, medium);
+
+  &.completed {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+  }
+
+  &.pending {
+    background: rgba(249, 115, 22, 0.1);
+    color: #F97316;
+  }
+
+  &.cancelled {
+    background: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+  }
+}
+
+.loadingContainer {
+  @include flex-column-center;
+  height: 400px;
+  gap: map-get($spacing, 4);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(139, 69, 19, 0.1);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@include respond-below(md) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+}
