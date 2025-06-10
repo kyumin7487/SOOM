@@ -1,0 +1,82 @@
+@use '../../styles/mixins' as *;
+
+.header {
+  @include flex-between;
+  padding: map-get($spacing, 4) map-get($spacing, 6);
+  background: white;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  @include respond-below(md) {
+    padding: map-get($spacing, 3) map-get($spacing, 4);
+  }
+}
+
+.leftSection {
+  @include flex-center;
+}
+
+.menuToggle {
+  @include button-icon(40px);
+  background: transparent;
+  color: var(--text-secondary);
+
+  &:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+  }
+}
+
+.rightSection {
+  @include flex-center;
+  gap: map-get($spacing, 4);
+}
+
+.notificationBtn {
+  @include button-icon(40px);
+  background: transparent;
+  color: var(--text-secondary);
+  position: relative;
+
+  &:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 18px;
+  height: 18px;
+  background: var(--error-color);
+  color: white;
+  border-radius: 50%;
+  @include flex-center;
+  @include text(xs, semibold);
+  border: 2px solid white;
+}
+
+.adminInfo {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+}
+
+.adminAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  @include flex-center;
+  @include text(base, semibold);
+}
+
+.adminName {
+  @include text(base, medium);
+
+  @include respond-below(md) {
+    display: none;
+  }
+}
