@@ -1,0 +1,313 @@
+@use '../../../../styles/mixins' as *;
+
+.orderDetailPage {
+  @include flex-column;
+  gap: map-get($spacing, 6);
+}
+
+.pageHeader {
+  @include flex-center;
+  gap: map-get($spacing, 4);
+  margin-bottom: map-get($spacing, 4);
+}
+
+.backButton {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  padding: map-get($spacing, 2) map-get($spacing, 4);
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+}
+
+.pageTitle {
+  @include heading(2xl, semibold);
+  margin: 0;
+}
+
+.orderInfo {
+  @include card-base;
+  padding: map-get($spacing, 6);
+}
+
+.orderHeader {
+  margin-bottom: map-get($spacing, 5);
+}
+
+.orderNumber {
+  @include flex-between;
+  align-items: flex-start;
+
+  h2 {
+    @include heading(xl, semibold);
+    margin: 0;
+    font-family: monospace;
+    color: var(--primary-color);
+  }
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  @include text(sm, medium);
+
+  &.completed {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+  }
+
+  &.pending {
+    background: rgba(249, 115, 22, 0.1);
+    color: #F97316;
+  }
+
+  &.cancelled {
+    background: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+  }
+}
+
+.orderMeta {
+  @include flex-column;
+  gap: map-get($spacing, 4);
+
+  @include respond-to(md) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+.metaItem {
+  @include flex-center;
+  gap: map-get($spacing, 3);
+  padding: map-get($spacing, 4);
+  background: #F9FAFB;
+  border-radius: var(--border-radius-small);
+}
+
+.metaIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.metaContent {
+  @include flex-column;
+  gap: map-get($spacing, 1);
+}
+
+.metaLabel {
+  @include text(xs, medium, var(--text-secondary));
+}
+
+.metaValue {
+  @include text(sm, semibold);
+}
+
+.orderItems {
+  @include card-base;
+  padding: map-get($spacing, 6);
+}
+
+.sectionTitle {
+  @include heading(lg, semibold);
+  margin: 0 0 map-get($spacing, 5) 0;
+  padding-bottom: map-get($spacing, 3);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.itemsList {
+  @include flex-column;
+  gap: map-get($spacing, 4);
+}
+
+.orderItem {
+  display: grid;
+  grid-template-columns: 80px 1fr auto auto;
+  gap: map-get($spacing, 4);
+  padding: map-get($spacing, 4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  align-items: center;
+
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+    gap: map-get($spacing, 3);
+  }
+}
+
+.itemImage {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--border-radius-small);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.itemInfo {
+  @include flex-column;
+  gap: map-get($spacing, 1);
+}
+
+.itemName {
+  @include text(base, semibold);
+  margin: 0;
+}
+
+.itemDescription {
+  @include text(sm, normal, var(--text-secondary));
+  margin: 0;
+  line-height: 1.4;
+}
+
+.itemOptions {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  margin-top: map-get($spacing, 1);
+}
+
+.optionsLabel {
+  @include text(xs, medium, var(--text-secondary));
+}
+
+.optionsValue {
+  @include text(xs, normal, var(--primary-color));
+  background: var(--secondary-color);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.itemAllergens {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  margin-top: map-get($spacing, 1);
+}
+
+.allergensLabel {
+  @include text(xs, medium, var(--text-secondary));
+}
+
+.allergensValue {
+  @include text(xs, normal, var(--error-color));
+  background: rgba(239, 68, 68, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.itemQuantity {
+  @include flex-column;
+  align-items: center;
+  gap: map-get($spacing, 1);
+  text-align: center;
+}
+
+.quantityLabel {
+  @include text(xs, medium, var(--text-secondary));
+}
+
+.quantityValue {
+  @include text(lg, bold, var(--primary-color));
+}
+
+.itemPrice {
+  @include flex-column;
+  align-items: flex-end;
+  gap: map-get($spacing, 1);
+  text-align: right;
+}
+
+.unitPrice {
+  @include text(xs, normal, var(--text-secondary));
+  text-decoration: line-through;
+}
+
+.totalPrice {
+  @include text(base, bold, var(--primary-color));
+}
+
+.orderSummary {
+  @include card-base;
+  padding: map-get($spacing, 6);
+}
+
+.summaryContent {
+  @include flex-column;
+  gap: map-get($spacing, 3);
+}
+
+.summaryRow {
+  @include flex-between;
+  padding: map-get($spacing, 2) 0;
+  border-bottom: 1px solid var(--border-color);
+
+  &.totalRow {
+    border-bottom: none;
+    border-top: 2px solid var(--border-color);
+    padding-top: map-get($spacing, 4);
+    margin-top: map-get($spacing, 2);
+
+    .summaryLabel {
+      @include text(lg, semibold);
+    }
+
+    .summaryValue {
+      @include text(xl, bold, var(--primary-color));
+    }
+  }
+}
+
+.summaryLabel {
+  @include text(base, medium);
+}
+
+.summaryValue {
+  @include text(base, semibold);
+}
+
+.loadingContainer {
+  @include flex-column-center;
+  height: 400px;
+  gap: map-get($spacing, 4);
+}
+
+.errorContainer {
+  @include flex-column-center;
+  height: 400px;
+  gap: map-get($spacing, 4);
+
+  h2 {
+    @include heading(xl, semibold, var(--text-secondary));
+    margin: 0;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(139, 69, 19, 0.1);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
