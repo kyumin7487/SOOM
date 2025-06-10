@@ -1,0 +1,255 @@
+@use '../../../styles/mixins' as *;
+
+.ordersPage {
+  @include flex-column;
+  gap: map-get($spacing, 6);
+}
+
+.pageHeader {
+  margin-bottom: map-get($spacing, 4);
+}
+
+.pageTitle {
+  @include heading(2xl, semibold);
+  margin: 0;
+}
+
+.statsCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: map-get($spacing, 4);
+  margin-bottom: map-get($spacing, 6);
+}
+
+.statCard {
+  @include card-base;
+  padding: map-get($spacing, 5);
+  text-align: center;
+
+  h3 {
+    @include text(sm, medium, var(--text-secondary));
+    margin: 0 0 map-get($spacing, 2) 0;
+  }
+}
+
+.statValue {
+  @include text(2xl, bold, var(--primary-color));
+  margin: 0;
+}
+
+.filters {
+  @include flex-between;
+  gap: map-get($spacing, 4);
+  margin-bottom: map-get($spacing, 6);
+
+  @include respond-below(md) {
+    flex-direction: column;
+  }
+}
+
+.dateFilters {
+  @include flex-center;
+  gap: map-get($spacing, 2);
+  background: white;
+  padding: map-get($spacing, 1);
+  border-radius: var(--border-radius-small);
+  border: 1px solid var(--border-color);
+}
+
+.dateFilterBtn {
+  padding: map-get($spacing, 2) map-get($spacing, 4);
+  border: none;
+  background: transparent;
+  border-radius: var(--border-radius-small);
+  @include text(sm, medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--secondary-color);
+  }
+
+  &.active {
+    background: var(--primary-color);
+    color: white;
+  }
+}
+
+.rightFilters {
+  @include flex-center;
+  gap: map-get($spacing, 4);
+
+  @include respond-below(md) {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.statusFilter {
+  position: relative;
+  min-width: 150px;
+}
+
+.filterIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.filterSelect {
+  @include input-base;
+  width: 100%;
+  padding-left: 40px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.searchBox {
+  position: relative;
+  min-width: 250px;
+
+  @include respond-below(md) {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.searchInput {
+  @include input-base;
+  width: 100%;
+  padding-left: 40px;
+}
+
+.ordersTable {
+  @include card-base;
+  padding: map-get($spacing, 5);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+
+  th, td {
+    padding: map-get($spacing, 3);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th {
+    @include text(sm, semibold, var(--text-secondary));
+    background: #F9FAFB;
+    white-space: nowrap;
+  }
+
+  td {
+    @include text(sm, normal);
+  }
+
+  tbody tr:hover {
+    background: #F9FAFB;
+  }
+}
+
+.orderNumber {
+  @include text(sm, semibold, var(--primary-color));
+  font-family: monospace;
+}
+
+.menuItems {
+  max-width: 200px;
+}
+
+.menuItem {
+  @include text(xs, normal);
+  margin-bottom: 2px;
+}
+
+.moreItems {
+  @include text(xs, normal, var(--text-secondary));
+  font-style: italic;
+}
+
+.totalPrice {
+  @include text(sm, semibold, var(--primary-color));
+  white-space: nowrap;
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  @include text(xs, medium);
+  white-space: nowrap;
+
+  &.completed {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+  }
+
+  &.pending {
+    background: rgba(249, 115, 22, 0.1);
+    color: #F97316;
+  }
+
+  &.cancelled {
+    background: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+  }
+}
+
+.viewButton {
+  @include flex-center;
+  gap: map-get($spacing, 1);
+  padding: map-get($spacing, 2) map-get($spacing, 3);
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+  text-decoration: none;
+  border-radius: var(--border-radius-small);
+  @include text(xs, medium);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(59, 130, 246, 0.2);
+  }
+}
+
+.noResults {
+  @include flex-center;
+  padding: map-get($spacing, 10);
+  @include text(lg, normal, var(--text-secondary));
+}
+
+.loadingContainer {
+  @include flex-column-center;
+  height: 400px;
+  gap: map-get($spacing, 4);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(139, 69, 19, 0.1);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
