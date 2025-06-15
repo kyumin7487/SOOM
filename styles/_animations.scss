@@ -58,6 +58,15 @@
   }
 }
 
+// mixin
+@mixin fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@mixin slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
 // Utility classes
 .fade-in {
   @include fade-in;
