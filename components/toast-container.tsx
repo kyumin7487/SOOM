@@ -1,7 +1,7 @@
 "use client"
 
 import ToastNotification from "./toast-notification"
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hook/use-toast"
 import styles from "./toast-container.module.scss"
 
 export default function ToastContainer() {
