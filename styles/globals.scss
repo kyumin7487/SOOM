@@ -39,7 +39,7 @@ body {
 }
 
 .container {
-  @include container;
+  @include mixins.container;
 }
 
 .btn {
@@ -177,7 +177,7 @@ body {
 
 // Scrollbar
 html {
-  @include scrollbar-custom;
+  @include mixins.scrollbar-custom;
 }
 
 // Print styles

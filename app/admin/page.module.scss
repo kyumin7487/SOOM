@@ -1,3 +1,5 @@
+@use '@/styles/variables' as vars;
+
 .loginPage {
   min-height: 100vh;
   display: flex;
@@ -9,7 +11,7 @@
 
 .loginContainer {
   background: var(--card-background);
-  padding: 40px;
+  padding: map-get(vars.$spacing, 10);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-hover);
   border: 1px solid var(--border-color);
