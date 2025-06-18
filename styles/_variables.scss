@@ -1,4 +1,4 @@
-// Colors
+// Colors - CSS Custom Properties
 :root {
   --primary-color: #8B4513;
   --primary-light: #D2B48C;
@@ -20,8 +20,8 @@
 }
 
 // Typography
-$font-family-primary: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-family-mono: 'Courier New', monospace;
+$font-family-primary: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif !default;
+$font-family-mono: 'Courier New', monospace !default;
 
 $font-sizes: (
         xs: 12px,
@@ -33,7 +33,7 @@ $font-sizes: (
         3xl: 28px,
         4xl: 36px,
         5xl: 48px
-);
+) !default;
 
 $font-weights: (
         light: 300,
@@ -41,7 +41,7 @@ $font-weights: (
         medium: 500,
         semibold: 600,
         bold: 700
-);
+) !default;
 
 // Spacing
 $spacing: (
@@ -57,7 +57,7 @@ $spacing: (
         12: 48px,
         16: 64px,
         20: 80px
-);
+) !default;
 
 // Breakpoints
 $breakpoints: (
@@ -67,7 +67,7 @@ $breakpoints: (
         lg: 1024px,
         xl: 1280px,
         2xl: 1536px
-);
+) !default;
 
 // Z-index
 $z-index: (
@@ -79,7 +79,7 @@ $z-index: (
         popover: 600,
         tooltip: 700,
         toast: 800
-);
+) !default;
 
 // Transitions
 $transitions: (
@@ -87,4 +87,4 @@ $transitions: (
         normal: 0.2s ease-out,
         slow: 0.3s ease-out,
         bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)
-);
+) !default;
