@@ -15,6 +15,8 @@ export default function AdminMenusPage() {
     const [currentMenu, setCurrentMenu] = useState<Menu | null>(null)
     const [searchTerm, setSearchTerm] = useState("")
     const [categoryFilter, setCategoryFilter] = useState<number | "all">("all")
+    const [tempImage, setTempImage] = useState<string>("") // 업로드 시 임시 미리보기용
+
     const [formData, setFormData] = useState({
         name_ko: "",
         name_en: "",
@@ -114,6 +116,7 @@ export default function AdminMenusPage() {
                 order: menu.order,
                 allergens: menu.allergens || "",
             })
+            setTempImage("") // 기존 이미지일 땐 임시 이미지 초기화
         } else {
             setCurrentMenu(null)
             setFormData({
@@ -128,15 +131,19 @@ export default function AdminMenusPage() {
                 order: 0,
                 allergens: "",
             })
+            setTempImage("")
         }
         setIsModalOpen(true)
     }
 
     const handleCloseModal = () => {
         setIsModalOpen(false)
+        setTempImage("")
     }
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleInputChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
         const { name, value, type } = e.target as HTMLInputElement
         setFormData({
             ...formData,
@@ -152,12 +159,13 @@ export default function AdminMenusPage() {
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) {
-            // 실제로는 서버에 업로드하고 URL을 받아옴
-            // 여기서는 임시로 로컬 URL 생성
+            // 임시 미리보기용 URL 생성
             const imageUrl = URL.createObjectURL(file)
+            setTempImage(imageUrl)
+            // 실제 저장용 formData.image는 업로드 후 서버에서 받아야 함 (여기선 비워둠)
             setFormData({
                 ...formData,
-                image: imageUrl,
+                image: "",
             })
         }
     }
@@ -165,16 +173,22 @@ export default function AdminMenusPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
-        // 실제로는 API 호출
+        // 실제로는 서버에 업로드 후 image URL 받아서 저장해야 함
+        // 여기선 임시 이미지 없으면 formData.image 그대로, 아니면 formData.image 대신 임시 이미지 URL 저장(테스트용)
+        const imageToSave = tempImage || formData.image
+
         if (currentMenu) {
             // 수정
-            const updatedMenus = menus.map((menu) => (menu.id === currentMenu.id ? { ...menu, ...formData } : menu))
+            const updatedMenus = menus.map((menu) =>
+                menu.id === currentMenu.id ? { ...menu, ...formData, image: imageToSave } : menu
+            )
             setMenus(updatedMenus)
         } else {
             // 추가
             const newMenu: Menu = {
                 id: Math.max(0, ...menus.map((m) => m.id)) + 1,
                 ...formData,
+                image: imageToSave,
             }
             setMenus([...menus, newMenu])
         }
@@ -184,7 +198,6 @@ export default function AdminMenusPage() {
 
     const handleDelete = async (id: number) => {
         if (window.confirm("정말로 이 메뉴를 삭제하시겠습니까?")) {
-            // 실제로는 API 호출
             setMenus(menus.filter((menu) => menu.id !== id))
         }
     }
@@ -241,7 +254,9 @@ export default function AdminMenusPage() {
                     <Filter size={18} className={styles.filterIcon} />
                     <select
                         value={categoryFilter}
-                        onChange={(e) => setCategoryFilter(e.target.value === "all" ? "all" : Number.parseInt(e.target.value))}
+                        onChange={(e) =>
+                            setCategoryFilter(e.target.value === "all" ? "all" : Number.parseInt(e.target.value))
+                        }
                         className={styles.filterSelect}
                     >
                         <option value="all">모든 카테고리</option>
@@ -400,7 +415,12 @@ export default function AdminMenusPage() {
                                 </div>
                                 <div className={styles.formGroup}>
                                     <label className={styles.checkboxLabel}>
-                                        <input type="checkbox" name="isActive" checked={formData.isActive} onChange={handleInputChange} />
+                                        <input
+                                            type="checkbox"
+                                            name="isActive"
+                                            checked={formData.isActive}
+                                            onChange={handleInputChange}
+                                        />
                                         활성화
                                     </label>
                                 </div>
@@ -409,8 +429,8 @@ export default function AdminMenusPage() {
                             <div className={styles.imageUploadSection}>
                                 <label htmlFor="image" className={styles.imageUploadLabel}>
                                     <div className={styles.imagePreview}>
-                                        {formData.image ? (
-                                            <img src={formData.image || "/placeholder.svg"} alt="메뉴 이미지 미리보기" />
+                                        {tempImage || formData.image ? (
+                                            <img src={tempImage || formData.image} alt="메뉴 이미지 미리보기" />
                                         ) : (
                                             <div className={styles.uploadPlaceholder}>
                                                 <ImageIcon size={32} />
