@@ -24,23 +24,22 @@ export default function MenuCard({ menu }: MenuCardProps) {
         if (menu.options && menu.options.length > 0) {
             setShowModal(true)
         } else {
-            // 옵션이 없는 경우 바로 장바구니에 추가
             const cartItem: CartItem = {
                 menu,
                 quantity: 1,
                 selectedOptions: {},
                 totalPrice: menu.price,
             }
-            // dispatch({ type: 'ADD_ITEM', payload: cartItem })
+            // 장바구니에 바로 추가하는 로직 추가 필요
         }
     }
 
     return (
         <>
-            <div className={styles.menuCard} onClick={() => setShowModal(true)}>
+            <div className={styles.menuCard} onClick={() => setShowModal(true)} role="button" tabIndex={0} onKeyPress={() => setShowModal(true)}>
                 <div className={styles.imageContainer}>
                     <img
-                        src={menu.image || "/placeholder.svg?height=200&width=200"}
+                        src={menu.image || "/placeholder.svg"}
                         alt={state.language === "ko" ? menu.name_ko : menu.name_en}
                         className={styles.image}
                     />
@@ -52,7 +51,7 @@ export default function MenuCard({ menu }: MenuCardProps) {
                         }}
                         aria-label={t("addToCart", state.language)}
                     >
-                        <Plus />
+                        <Plus size={20} />
                     </button>
                 </div>
 

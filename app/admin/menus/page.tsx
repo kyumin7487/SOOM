@@ -51,7 +51,7 @@ export default function AdminMenusPage() {
                     description_ko: "깔끔하고 진한 에스프레소의 맛",
                     description_en: "Clean and rich espresso taste",
                     price: 4500,
-                    image: "/Americano.jpg",
+                    image: "/Americano.jpeg",
                     isActive: true,
                     order: 1,
                     categoryId: 1,
